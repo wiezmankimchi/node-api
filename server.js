@@ -60,15 +60,16 @@ router.route("/people").get(function(req, res) {
 });
 
 router
-  .route("/people/:person_id")
+  .route("/people/:id")
   .get(function(req, res) {
-    Person.findById(req.params.person_id, function(err, person) {
+    console.log("_id:", req.params.id);
+    Person.findById(req.params.id, function(err, person) {
       if (err) req.send(err);
       res.json(person);
     });
   })
   .put(function(req, res) {
-    Person.findById(req.params.person_id, function(err, person) {
+    Person.findById(req.params.id, function(err, person) {
       if (err) res.send(err);
       for (var field in person) {
         if (field !== "_id" && field !== "__v") {
@@ -86,7 +87,7 @@ router
   .delete(function(req, res) {
     Person.remove(
       {
-        _id: req.params.person_id
+        _id: req.params.id
       },
       function(err, person) {
         if (err) res.send(err);
