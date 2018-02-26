@@ -11,18 +11,18 @@ var DataSchema = new Schema({
   eyeColor: String,
   name: String,
   gender: String,
-  compnay: String,
+  company: String,
   email: String,
   phone: String,
   address: String,
   about: String,
   registered: Date,
   latitude: Number,
-  longtitude: Number,
+  longitude: Number,
   tags: Array,
-  freinds: Array,
+  friends: Array,
   greeting: String,
-  favoriteFruite: String
+  favoriteFruit: String
 });
 
 module.exports = mongoose.model("Person", DataSchema);

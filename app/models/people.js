@@ -20,7 +20,7 @@ var PeopleSchema = new Schema(
     eyeColor: String,
     name: String,
     gender: String,
-    compnay: String,
+    company: String,
     email: String,
     phone: String,
     address: String,

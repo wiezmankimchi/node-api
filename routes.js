@@ -8,6 +8,8 @@ var router = express.Router();
 var Person = require("./app/models/people");
 
 router.use(function(req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   console.log("Something is happening");
   next(); //go to the next routes
 });
@@ -30,6 +32,7 @@ router.get("/", function(req, res) {
 router.route("/people").get(function(req, res) {
   Person.find(function(err, people) {
     if (err) res.send(err);
+    console.log("list all");
     res.json(people);
   });
 });
@@ -37,9 +40,9 @@ router.route("/people").get(function(req, res) {
 router
   .route("/people/:id")
   .get(function(req, res) {
-    console.log("_id:", req.params.id);
     Person.findById(req.params.id, function(err, person) {
       if (err) req.send(err);
+      console.log("list one specific - _id:", req.params.id);
       res.json(person);
     });
   })
@@ -55,6 +58,7 @@ router
       }
       person.save(function(err) {
         if (err) res.send(err);
+        console.log("update one specific - _id:", req.params.id);
         res.json({
           message: "Person updated!"
         });
@@ -68,6 +72,7 @@ router
       },
       function(err, person) {
         if (err) res.send(err);
+        console.log("delete one specific - _id:", req.params.id);
         res.json({
           message: "Successfully deleted!"
         });
@@ -87,6 +92,7 @@ router.route("/person").post(function(req, res) {
 
   person.save(function(err) {
     if (err) res.send(err);
+    console.log("update one specific");
     res.json({
       message: "Person created!"
     });
